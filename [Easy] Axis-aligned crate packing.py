@@ -20,12 +20,51 @@ fit1(5, 100, 6, 1) => 0
 
 @author: ryanhennes
 """
-
+#Original Problem
 def fit1(X, Y, x, y):
-    print("")
+    #use floor division to determine if the boxes can fit
+    xRemainder = X // x
+    yRemainder = Y // y
+    return (xRemainder * yRemainder)
 
+print("Original Solutions")
 print(fit1(25, 18, 6, 5))
 print(fit1(10, 10, 1, 1))
 print(fit1(12, 34, 5, 6))
 print(fit1(12345, 678910, 1112, 1314))
 print(fit1(5, 100, 6, 1))
+
+
+"""
+Optional bonus fit2
+You upgrade your packing robot with the latest in packing technology: turning stuff. You now have the option of rotating all boxes by 90 degrees, so that you can treat a set of 6-by-5 boxes as a set of 5-by-6 boxes. You do not have the option of rotating some of the boxes but not others.
+
+fit2(25, 18, 6, 5) => 15
+fit2(12, 34, 5, 6) => 12
+fit2(12345, 678910, 1112, 1314) => 5676
+fit2(5, 5, 3, 2) => 2
+fit2(5, 100, 6, 1) => 80
+fit2(5, 5, 6, 1) => 0
+Hint: is there an easy way to define fit2 in terms of fit1?
+
+Note that this is not the maximum possible number of boxes you could get if you rotated them independently. For instance, if you're fitting 3-by-2 boxes into a 5-by-5 crate, it's possible to fit 4 by varying the orientations, but fit2(5, 5, 3, 2) is 2, not 4. Handling the general case is much more complicated, and beyond the scope of today's challenge.
+"""
+#Bonus 1
+def fit2(X, Y, x, y):
+
+    bestArrangement = fit1(X, Y, x, y)  #storing original box arrnagment for comparison
+    arr2 = fit1(X, Y, y, x) #rotating the boxes by 90 degrees
+    if(bestArrangement < arr2):
+       bestArrangement = arr2
+    return bestArrangement
+
+print("Bonus 1 Solutions")
+print(fit2(25, 18, 6, 5))
+print(fit2(12, 34, 5, 6))
+print(fit2(12345, 678910, 1112, 1314))
+print(fit2(5, 5, 3, 2))
+print(fit2(5, 100, 6, 1))
+print(fit2(5, 5, 6, 1))
+    
+    
+    
